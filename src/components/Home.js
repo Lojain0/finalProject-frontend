@@ -20,7 +20,7 @@ export default function Navbar() {
                           <h4>فـ اهلاً في مساحتك الخاصة</h4>
                         
                           <Link className=".btn" to={"/SignUp"} className="btn">
-                             للتسجيل
+                             ToSignUp
                           </Link>
                           </div>
                           <br/> <br/>  <br/>    

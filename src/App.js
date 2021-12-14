@@ -5,23 +5,23 @@ import Navbar from "./components/Navbar";
 import LogIn from "./components/Login";
 import Signup from "./components/Signup";
 import Posts from "./components/Posts";
-
-
-
+import Likes from "./components/Likes";
+// import AddPost from "./components/Addpost";
+import AddPost from "./components/AddPost";
 
 
 export default function App() {
-  const [token, settoken] = useState("")
- 
+  const [token, setToken] = useState("")
 
   return (
     <div>
-      <Navbar/>
+      <Navbar setToken={setToken} token={token} />
        <Route exact path="/" component={Home} />
   <Route exact path="/signup" component={Signup} />
-      <Route exact path="/login" render={()=>{return <LogIn settoken={settoken}/>}} />
+      <Route exact path="/login" render={()=>{return <LogIn setToken={setToken}/>}} />
       <Route exact path="/posts" render={()=>{return <Posts token={token}/>}} />
-      {/* <Route exact path="/post" component={Home} /> */}
+      <Route path="/AddPost" exact render={()=>{return <AddPost token={token}/>}} />
+      {/* <Route  exact path="/posts" render={() => { return < AddPost token={token} />;}} /> */}
       
     </div>
   );

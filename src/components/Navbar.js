@@ -20,7 +20,9 @@ export default function Navbar({token, setToken}) {
       ) : (
         <ul>
           <li>
+          <Link className="link" to="/" > Home </Link>
             <Link className="link" to="/login" > Log In </Link>
+            
 
           </li>
         

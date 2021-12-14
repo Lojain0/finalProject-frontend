@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./login.css"
 
-export default function SignUp({setToken}) {
+export default function Login({setToken}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -25,7 +25,7 @@ export default function SignUp({setToken}) {
         setToken(response.data.token)
         history.push("/posts");
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
       }
     };
   return (
@@ -34,7 +34,7 @@ export default function SignUp({setToken}) {
 
 
 <div class="container">
-        <form id="form" class="form">
+        <div id="form" class="form">
             <h2>Log In </h2>
         
             <div class="form-control">
@@ -47,7 +47,7 @@ export default function SignUp({setToken}) {
             </div>
           
             <button onClick={(e) => {checkLogin();}}type="submit">Submit</button>
-        </form>
+        </div>
     </div>
 
 
