@@ -22,6 +22,7 @@ export default function Signup() {
         setEmailInput(e.target.value)
     }
 
+
     const addUser = async (event) => {
         event.preventDefault();
 
@@ -29,7 +30,7 @@ export default function Signup() {
         const response = await axios.post("http://localhost:5000/signup", {
             name: nameInput,
             email: emailInput,
-            password: passwordInput,
+            password: passwordInput
           });
           console.log(response.data);
           if (response.status === 201){
@@ -58,6 +59,7 @@ export default function Signup() {
                 <label for="passowrd">Password</label>
                 <input onChange={(e) => {savePassword(e);}} type="password" id="password" placeholder="Enter Passowrd" />
             </div>
+  
           
             <button onClick={(event) => {addUser(event);}} type="submit">submit</button>
         </form>

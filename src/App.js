@@ -10,6 +10,7 @@ import Likes from "./components/Likes";
 import AddPost from "./components/AddPost";
 
 
+
 export default function App() {
   const [token, setToken] = useState("")
 
@@ -21,7 +22,8 @@ export default function App() {
       <Route exact path="/login" render={()=>{return <LogIn setToken={setToken}/>}} />
       <Route exact path="/posts" render={()=>{return <Posts token={token}/>}} />
       <Route path="/AddPost" exact render={()=>{return <AddPost token={token}/>}} />
-      {/* <Route  exact path="/posts" render={() => { return < AddPost token={token} />;}} /> */}
+
+      
       
     </div>
   );

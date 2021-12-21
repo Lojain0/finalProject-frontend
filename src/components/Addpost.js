@@ -6,8 +6,6 @@ export default function AddPost(props) {
    
     const [img, setImg] = useState("")
     const [text, setText] = useState("")
-
-    console.log(props, "l")
     const {token ,setPost} = props
  
           const changeImgVal = (e) => {
@@ -35,6 +33,7 @@ export default function AddPost(props) {
         setText("")
       }
 
+      
 
 
     return (
@@ -47,7 +46,7 @@ export default function AddPost(props) {
         <div id="form" class="form">
             <h2>AddPost</h2>
             <div class="form-control">
-                <label for="img"> Img </label>
+                <label for="img"> Add Img </label>
                 <input onChange={(e) => { changeImgVal(e); }}  value={img}  type="text" id="text" placeholder=" Add Img  " />{" "}
             </div>
             <div class="form-control">
@@ -57,6 +56,7 @@ export default function AddPost(props) {
            
 
             <button onClick={() => {addPost();  }}type="submit"> Add Post </button>
+
         </div>
     </div>
         </div>

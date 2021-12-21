@@ -1,0 +1,55 @@
+#serch{
+    display: flex;
+    justify-content: center ;
+    /* margin: auto; */
+
+}
+
+#serch input {
+width: 300px;
+height: 20px;
+margin: 25px;
+}
+
+
+#card{
+    
+    margin: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    border-radius: 50px 30px; 
+    margin: 50px;
+    border-radius: 50px 30px; 
+    text-align: center;
+
+}
+#onecard:hover {
+    -ms-transform: scale(1.2); 
+    -webkit-transform: scale(1.2); 
+    transform: scale(1.1); 
+  }
+  #onecard{
+    border: black solid 1px;
+margin: 20px;
+border-radius: 50px; 
+background-color: #f1ebe8;
+  }
+img{
+    width: 250px;
+    height: 350px;
+}
+
+#input{
+    margin: 1px;
+    width: 400px;
+    height: 40px;
+}
+.btnprimary{
+    border-radius: 10px;
+    margin: 3px;
+
+}
+.btnprimary:hover{
+    background-color: rgb(221, 103, 103);
+    cursor: pointer;
+}

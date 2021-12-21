@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link  } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "./navbar.css"
 
-export default function Navbar({token, setToken}) {
+export default function Navba({token, setToken}) {
     return (
      
                <div  class="topnav">
@@ -11,9 +11,10 @@ export default function Navbar({token, setToken}) {
       
           <li>
     <Link to="/login" onClick={() => {setToken("") }}>Log Out</Link>
- 
+
               <Link   to="/posts">Posts </Link>
               <Link   to="/AddPost">Add Post </Link>
+              <Link   to="/favorite">My Favorite </Link>
 
           </li>
         </ul>

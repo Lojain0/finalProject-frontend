@@ -1,73 +1,106 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./posts.css"
 
 
-export default function Posts({token}) {
+export default function Posts({ token }) {
 
-//   const token=  JSON.parse(localStorage.getItem("token"))
-// const [inputVal, setInputVal] = useState('')
-const [Posts, setPosts] = useState([])
- 
-  const [ValueInput, SetValueInput] = useState('');
+    const [Posts, setPosts] = useState([])
+    const [searchArr, setSearchArr] = useState([])
+    const [inputSearch, SetInputSearch] = useState('');
 
 
- 
-  useEffect(async () => {
-    const res = await axios.get("http://localhost:5000/posts", {
-      headers: {authorization: `Bearer ${token}`},
-    });
-    setPosts(res.data);
-    
-  }, []);
+    useEffect(async () => {
+        const res = await axios.get("http://localhost:5000/posts", {
+            headers: { authorization: `Bearer ${token}` },
+        });
+        setPosts(res.data);
+        console.log(res.data, "ww");
+        // setSearchArr(res.data)
+
+    }, []);
 
 
-  const deletepost = async (id, index)=>{
-    const deletepost = await axios.delete(`http://localhost:5000/posts/${id}`,{
-      headers:{authorization: "Bearer " + token},
-    });
-    console.log((deletepost.data));
-    if (deletepost.data === "deleted"){
-      const copiedArr= [...Posts];
-    copiedArr.splice(index,1);
-    setPosts(copiedArr);
-    }  
-}
+    const deletepost = async (id, index) => {
+        const deletepost = await axios.delete(`http://localhost:5000/posts/${id}`, {
+            headers: { authorization: "Bearer " + token },
+        });
+        console.log((deletepost.data));
+        if (deletepost.data === "deleted") {
+            const copiedArr = [...Posts];
+            copiedArr.splice(index, 1);
+            setPosts(copiedArr);
+            setSearchArr(copiedArr);
 
-function setvalue(e) {
-  let v = e.target.value;
-  SetValueInput(v)
-}
-function search(e) {
-    let newArr = Posts.filter((item)=>item.type ==ValueInput );
-    setPosts(newArr)
-}
-  return (
-    <>
+        }
+    }
 
-    <div id="serch">
-      <input  id="input" onChange={setvalue}type="text" className="se" placeholder="Search Here" />
-        <button className="btn" onClick={search} >Search</button>
-    </div>
+    function setvalue(e) {
+        SetInputSearch(e.target.value)
+        setSearchArr(Posts)
+    }
 
-        
-    <div id="card" >
-
-        {Posts.map((element, i) => {
-          console.log(element);
-          return (
-            <div className="post" key={element._id}>
-          
-            {
-                element.img &&   <img  src={element.img} className="card-img-top" alt="..."/>
+    function search(e) {
+        // setSearchArr(Posts)
+        const search = Posts.filter((element) => {
+            if (element.text.toLowerCase().includes(inputSearch.toLocaleLowerCase())) {
+                return element;
             }
-                        <p>{element.text}</p> 
-            <button className="btn btn-primary" onClick={() => {deletepost(element._id, i); }}> حذف </button>
-          <br/>  <br/>
+            console.log(element);
+        });
+        setSearchArr(search);
+    }
+
+    return (
+        <>
+
+            <div id="serch">
+                <input id="input" onChange={setvalue} type="text" className="se" placeholder="Search Here" />
+                <button className="btn" onClick={search} >Search</button>
             </div>
-          );
-        })}
-      </div>
-    </>
-  );
+
+
+            <div id="card" >
+
+                {searchArr.length ?
+                    searchArr.map((element, i) => {
+                        return (
+                            <div id="onecard" key={element._id}>
+                                <b>  {element.user.name} ♡</b>
+                                <br></br>
+                                {
+                                    element.img && <img src={element.img} className="card-img-top" alt="..." />
+                                }
+                                <p>{element.text}</p>
+                                <button className="btnprimary" onClick={() => { deletepost(element._id, i); }}> ❌ </button>
+                                <button className="btnprimary"> ❤️ </button>
+                                <button className="btnprimary"> 📝 </button>
+                                <br /> <br />
+                            </div>
+                        )
+                    })
+                    :
+                    Posts.map((element, i) => {
+                        console.log(element);
+                        return (
+                            <div id="onecard" key={element._id}>
+                                <b>  {element.user.name} ♡</b>
+                                <br></br>
+                                {
+                                    element.img && <img src={element.img} className="card-img-top" alt="..." />
+                                }
+                                <p>{element.text}</p>
+
+                                <button className="btnprimary" onClick={() => { deletepost(element._id, i); }}> ❌ </button>
+                                <button className="btnprimary"> ❤️ </button>
+                                <button className="btnprimary"> 📝 </button>
+                                <br /> <br />
+                            </div>
+                        );
+                    })}
+
+            </div>
+        </>
+    );
 }
 
