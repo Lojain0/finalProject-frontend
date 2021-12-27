@@ -6,7 +6,7 @@ export default function Navba({token, setToken}) {
     return (
      
                <div  class="topnav">
-      {token ? (
+      {token.token ? (
         <ul>
       
           <li>
@@ -15,6 +15,8 @@ export default function Navba({token, setToken}) {
               <Link   to="/posts">Posts </Link>
               <Link   to="/AddPost">Add Post </Link>
               <Link   to="/favorite">My Favorite </Link>
+              <Link   to="/favorite">My Account </Link>
+              <Link className="link" to="/" > Home </Link>
 
           </li>
         </ul>

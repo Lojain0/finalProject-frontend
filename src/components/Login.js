@@ -21,8 +21,8 @@ export default function Login({setToken}) {
           email: email,
           password: password,
         });
-        console.log(response.data)
-        setToken(response.data.token)
+        console.log(response.data,"loooogggg")
+        setToken(response.data)
         history.push("/posts");
       } catch (error) {
         console.log(error);
@@ -30,7 +30,6 @@ export default function Login({setToken}) {
     };
   return (
     <div>  
-
 
 
 <div class="container">

@@ -23,8 +23,8 @@ export default function Signup() {
     }
 
 
-    const addUser = async (event) => {
-        event.preventDefault();
+    const addUser = async (e) => {
+        e.preventDefault();
 
      try {
         const response = await axios.post("http://localhost:5000/signup", {
@@ -61,7 +61,7 @@ export default function Signup() {
             </div>
   
           
-            <button onClick={(event) => {addUser(event);}} type="submit">submit</button>
+            <button onClick={(e) => {addUser(e);}} type="submit">submit</button>
         </form>
     </div>
             </div>

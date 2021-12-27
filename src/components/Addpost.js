@@ -26,14 +26,13 @@ export default function AddPost(props) {
             newtext:text,
           },
           {
-            headers: { authorization: `Bearer ${token}` },
+            headers: { authorization: `Bearer ${token.token}` },
           }
         );
         setImg("")
         setText("")
       }
 
-      
 
 
     return (
@@ -47,15 +46,15 @@ export default function AddPost(props) {
             <h2>AddPost</h2>
             <div class="form-control">
                 <label for="img"> Add Img </label>
-                <input onChange={(e) => { changeImgVal(e); }}  value={img}  type="text" id="text" placeholder=" Add Img  " />{" "}
+                <input onChange={(e) => {changeImgVal(e);}}  value={img}  type="text" id="text" placeholder=" Add Img  " />{" "}
             </div>
             <div class="form-control">
                 <label for="text"> text</label>
-                <input onChange={(e) => {    changeTextVal(e);  }} value={text} type="text" id="text" placeholder="Add Text" />
+                <input onChange={(e) => {changeTextVal(e);}} value={text} type="text" id="text" placeholder="Add Text" />
             </div>
-           
+           <br></br>
 
-            <button onClick={() => {addPost();  }}type="submit"> Add Post </button>
+            <button onClick={() => {addPost();}}type="submit"> Add Post </button>
 
         </div>
     </div>
