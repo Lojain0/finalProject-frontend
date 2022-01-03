@@ -7,15 +7,15 @@ export default function Posts({ token }) {
   const [searchArr, setSearchArr] = useState([]);
   const [inputSearch, SetInputSearch] = useState("");
   const [toggle, setToggle] = useState(false);
-  const [upImg, setUpImg] = useState("");
   const [upText, setUpText] = useState("");
+  const [like, setLike] = useState([]);
 
   useEffect(async () => {
     const res = await axios.get("http://localhost:5000/posts", {
       headers: { authorization: `Bearer ${token.token}` },
     });
     setPosts(res.data);
-
+    // setLike(res.data);
     console.log(res.data, "ww");
   }, []);
 
@@ -35,7 +35,6 @@ export default function Posts({ token }) {
     const update = await axios.put(
       `http://localhost:5000/posts/${id}`,
       {
-        img: upImg,
         text: upText,
       },
       {
@@ -43,13 +42,7 @@ export default function Posts({ token }) {
       }
     );
     setPosts(update.data);
-    setUpImg();
-    setUpText();
     setToggle(!toggle);
-  };
-
-  const updaetImgVal = (e) => {
-    setUpImg(e.target.value);
   };
 
   const updaetTextVal = (e) => {
@@ -72,10 +65,26 @@ export default function Posts({ token }) {
       ) {
         return element;
       }
+
       console.log(element);
     });
     setSearchArr(search);
   }
+
+  const addLike = async (id) => {
+    try {
+      const result = await axios.post(
+        `http://localhost:5000/Like/${id}`,
+        {},
+        {
+          headers: { authorization: "Bearer " + token.token },
+        }
+      );
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -103,7 +112,15 @@ export default function Posts({ token }) {
                     <img src={element.img} className="card-img-top" alt="..." />
                   )}
                   <p>{element.text}</p>
-                  <button className="btnprimary"> ❤️ </button>
+                  <button
+                    className="btnprimary"
+                    onClick={() => {
+                      addLike(element._id);
+                    }}
+                  >
+                    {" "}
+                    🖤{" "}
+                  </button>
                   {token.email == element.user.email ? (
                     <div>
                       <button
@@ -129,17 +146,10 @@ export default function Posts({ token }) {
                           {" "}
                           <input
                             onChange={(e) => {
-                              updaetImgVal(e);
-                            }}
-                            type="text"
-                            placeholder=" Update Img  "
-                          />
-                          <input
-                            onChange={(e) => {
                               updaetTextVal(e);
                             }}
                             type="text"
-                            placeholder=" Update text  "
+                            placeholder=" Update text "
                           />
                           <button
                             className="btnprimary"
@@ -182,7 +192,15 @@ export default function Posts({ token }) {
                     <img src={element.img} className="card-img-top" alt="..." />
                   )}
                   <p>{element.text}</p>
-                  <button className="btnprimary"> ❤️ </button>
+                  <button
+                    className="btnprimary"
+                    onClick={() => {
+                      addLike(element._id);
+                    }}
+                  >
+                    {" "}
+                    🖤{" "}
+                  </button>
                   {token.email == element.user.email ? (
                     <div>
                       <button
@@ -206,13 +224,6 @@ export default function Posts({ token }) {
                       {toggle == true ? (
                         <div>
                           {" "}
-                          <input
-                            onChange={(e) => {
-                              updaetImgVal(e);
-                            }}
-                            type="text"
-                            placeholder=" Update Img  "
-                          />
                           <input
                             onChange={(e) => {
                               updaetTextVal(e);

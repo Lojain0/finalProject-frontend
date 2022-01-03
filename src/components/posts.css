@@ -1,3 +1,7 @@
+body {
+  background-image: url("https://i.pinimg.com/736x/50/52/60/505260f2fd9ac52e3a427aa591d3f40d.jpg");
+}
+
 #serch {
   display: flex;
   justify-content: center;
@@ -33,6 +37,7 @@
 img {
   width: 300px;
   height: 350px;
+  border-radius: 50px;
 }
 
 #input {
@@ -45,7 +50,7 @@ img {
   margin: 3px;
 }
 .btnprimary:hover {
-  background-color: rgb(221, 103, 103);
+  background-color: rgb(189, 162, 162);
   cursor: pointer;
 }
 

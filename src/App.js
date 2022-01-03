@@ -6,10 +6,18 @@ import LogIn from "./components/Login";
 import Signup from "./components/Signup";
 import Posts from "./components/Posts";
 import Likes from "./components/Likes";
+import Account from "./components/Account";
 import AddPost from "./components/AddPost";
 
 export default function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(() => {
+    const saved = localStorage.getItem("token");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "";
+  });
+  useEffect(() => {
+    localStorage.setItem("token", JSON.stringify(token));
+  }, [token]);
 
   return (
     <div>
@@ -25,6 +33,14 @@ export default function App() {
       />
       <Route
         exact
+        path="/Account"
+        render={() => {
+          return <Account token={token} />;
+        }}
+      />
+
+      <Route
+        exact
         path="/posts"
         render={() => {
           return <Posts token={token} />;
@@ -35,6 +51,13 @@ export default function App() {
         exact
         render={() => {
           return <AddPost token={token} />;
+        }}
+      />
+      <Route
+        exact
+        path="/Favorite"
+        render={() => {
+          return <Likes token={token} />;
         }}
       />
     </div>
