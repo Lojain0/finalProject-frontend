@@ -16,11 +16,19 @@ export default function Navba({ token, setToken }) {
             >
               Log Out
             </Link>
-
-            <Link to="/posts">Posts </Link>
-            <Link to="/AddPost">Add Post </Link>
-            <Link to="/favorite">My Favorite </Link>
-            <Link to="/Account">My Account </Link>
+            {token.payload.admin ? (
+              <>
+                <Link to="/posts">Posts </Link>
+                <Link to="/Account">My Account </Link>
+              </>
+            ) : (
+              <div>
+                <Link to="/posts">Posts </Link>
+                <Link to="/AddPost">Add Post </Link>
+                <Link to="/favorite">My Favorite </Link>
+                <Link to="/Account">My Account </Link>
+              </div>
+            )}
           </li>
         </ul>
       ) : (

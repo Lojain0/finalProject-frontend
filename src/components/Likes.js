@@ -10,7 +10,7 @@ export default function Likes({ token }) {
       const res = await axios.get("http://localhost:5000/Like", {
         headers: { authorization: "Bearer " + token.token },
       });
-      console.log(res.data);
+      console.log(res.data, "33333");
       setLike(res.data);
     }
   }, []);
@@ -22,15 +22,20 @@ export default function Likes({ token }) {
     coppyDelete.splice(i, 1);
     setLike(coppyDelete);
   };
+
   return (
     <div id="cardd">
+      {console.log(like)}
       {like.map((element, i) => {
         console.log(element);
         return (
           <div id="onecardd">
-            <div key={i}>
-              <p>{element.name}</p>
-              <img src={element.img} alr="No Img" />
+            <div>
+              <p>{element.user.user}</p>
+              {element.img && (
+                <img src={element.img} className="card-img-top" alt="..." />
+              )}
+              <p>{element.text}</p>
             </div>
             <br />
             <button

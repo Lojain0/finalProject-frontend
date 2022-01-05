@@ -8,14 +8,13 @@ export default function Posts({ token }) {
   const [inputSearch, SetInputSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const [upText, setUpText] = useState("");
-  const [like, setLike] = useState([]);
+  // const [like, setLike] = useState([]);
 
   useEffect(async () => {
     const res = await axios.get("http://localhost:5000/posts", {
       headers: { authorization: `Bearer ${token.token}` },
     });
     setPosts(res.data);
-    // setLike(res.data);
     console.log(res.data, "ww");
   }, []);
 
@@ -112,59 +111,67 @@ export default function Posts({ token }) {
                     <img src={element.img} className="card-img-top" alt="..." />
                   )}
                   <p>{element.text}</p>
-                  <button
-                    className="btnprimary"
-                    onClick={() => {
-                      addLike(element._id);
-                    }}
-                  >
-                    {" "}
-                    🖤{" "}
-                  </button>
+                  {token.payload.admin ? (
+                    ""
+                  ) : (
+                    <button
+                      className="btnprimary"
+                      onClick={() => {
+                        addLike(element._id);
+                      }}
+                    >
+                      {" "}
+                      🖤{" "}
+                    </button>
+                  )}
                   {token.email == element.user.email ? (
-                    <div>
-                      <button
-                        className="btnprimary"
-                        onClick={() => {
-                          deletepost(element._id, i);
-                        }}
-                      >
-                        {" "}
-                        ❌{" "}
-                      </button>
-                      <button
-                        className="btnprimary"
-                        onClick={() => {
-                          ChangeToggel();
-                        }}
-                      >
-                        {" "}
-                        📝{" "}
-                      </button>
-                      {toggle == true ? (
-                        <div>
+                    token.payload.admin ? (
+                      ""
+                    ) : (
+                      <div>
+                        <button
+                          className="btnprimary"
+                          onClick={() => {
+                            deletepost(element._id, i);
+                          }}
+                        >
                           {" "}
-                          <input
-                            onChange={(e) => {
-                              updaetTextVal(e);
-                            }}
-                            type="text"
-                            placeholder=" Update text "
-                          />
-                          <button
-                            className="btnprimary"
-                            onClick={() => {
-                              updatePost(element._id);
-                            }}
-                          >
+                          ❌{" "}
+                        </button>
+                        <button
+                          className="btnprimary"
+                          onClick={() => {
+                            ChangeToggel();
+                          }}
+                        >
+                          {" "}
+                          📝{" "}
+                        </button>
+                        {toggle == true ? (
+                          <div>
                             {" "}
-                            Update{" "}
-                          </button>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                            <input
+                              onChange={(e) => {
+                                updaetTextVal(e);
+                              }}
+                              type="text"
+                              placeholder=" Update text "
+                            />
+                            <button
+                              className="btnprimary"
+                              onClick={() => {
+                                updatePost(element._id);
+                              }}
+                            >
+                              {" "}
+                              Update{" "}
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    )
                   ) : token.payload.admin ? (
                     <button
                       className="btnprimary"
@@ -192,59 +199,67 @@ export default function Posts({ token }) {
                     <img src={element.img} className="card-img-top" alt="..." />
                   )}
                   <p>{element.text}</p>
-                  <button
-                    className="btnprimary"
-                    onClick={() => {
-                      addLike(element._id);
-                    }}
-                  >
-                    {" "}
-                    🖤{" "}
-                  </button>
+                  {token.payload.admin ? (
+                    ""
+                  ) : (
+                    <button
+                      className="btnprimary"
+                      onClick={() => {
+                        addLike(element._id);
+                      }}
+                    >
+                      {" "}
+                      🖤{" "}
+                    </button>
+                  )}
                   {token.email == element.user.email ? (
-                    <div>
-                      <button
-                        className="btnprimary"
-                        onClick={() => {
-                          deletepost(element._id, i);
-                        }}
-                      >
-                        {" "}
-                        ❌{" "}
-                      </button>
-                      <button
-                        className="btnprimary"
-                        onClick={() => {
-                          ChangeToggel();
-                        }}
-                      >
-                        {" "}
-                        📝{" "}
-                      </button>
-                      {toggle == true ? (
-                        <div>
+                    token.payload.admin ? (
+                      ""
+                    ) : (
+                      <div>
+                        <button
+                          className="btnprimary"
+                          onClick={() => {
+                            deletepost(element._id, i);
+                          }}
+                        >
                           {" "}
-                          <input
-                            onChange={(e) => {
-                              updaetTextVal(e);
-                            }}
-                            type="text"
-                            placeholder=" Update text  "
-                          />
-                          <button
-                            className="btnprimary"
-                            onClick={() => {
-                              updatePost(element._id);
-                            }}
-                          >
+                          ❌{" "}
+                        </button>
+                        <button
+                          className="btnprimary"
+                          onClick={() => {
+                            ChangeToggel();
+                          }}
+                        >
+                          {" "}
+                          📝{" "}
+                        </button>
+                        {toggle == true ? (
+                          <div>
                             {" "}
-                            Update{" "}
-                          </button>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                            <input
+                              onChange={(e) => {
+                                updaetTextVal(e);
+                              }}
+                              type="text"
+                              placeholder=" Update text  "
+                            />
+                            <button
+                              className="btnprimary"
+                              onClick={() => {
+                                updatePost(element._id);
+                              }}
+                            >
+                              {" "}
+                              Update{" "}
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    )
                   ) : token.payload.admin ? (
                     <button
                       className="btnprimary"
