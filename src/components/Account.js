@@ -15,7 +15,11 @@ export default function Account({ token }) {
       headers: { authorization: `Bearer ${token.token}` },
     });
     setUser(res.data);
-    console.log(res.data);
+    // console.log(res.data);
+    setName(res.data.name);
+    setEmail(res.data.email);
+    setPassword(res.data.password);
+    setPhoto(res.data.photo);
   }, []);
 
   const changeName = (e) => {
@@ -65,6 +69,7 @@ export default function Account({ token }) {
         }}
         type="text"
         placeholder="Name"
+        value={name}
       />
       <input
         onChange={(e) => {
@@ -72,6 +77,7 @@ export default function Account({ token }) {
         }}
         type="text"
         placeholder="Email"
+        value={email}
       />
       <input
         onChange={(e) => {
@@ -79,6 +85,7 @@ export default function Account({ token }) {
         }}
         type="password"
         placeholder="Password"
+        value={password}
       />
       <input
         onChange={(e) => {
@@ -86,6 +93,7 @@ export default function Account({ token }) {
         }}
         type="text"
         placeholder="Profile Img"
+        value={photo}
       />
 
       <button

@@ -45,3 +45,10 @@
   border-radius: 30px;
   display: flex;
 }
+
+@media only screen and (max-width: 900px) {
+  .onecontainer {
+    width: 150px;
+    height: 150px;
+  }
+}

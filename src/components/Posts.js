@@ -8,7 +8,7 @@ export default function Posts({ token }) {
   const [inputSearch, SetInputSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const [upText, setUpText] = useState("");
-  // const [like, setLike] = useState([]);
+  const [like, setLike] = useState([]);
 
   useEffect(async () => {
     const res = await axios.get("http://localhost:5000/posts", {
@@ -16,6 +16,13 @@ export default function Posts({ token }) {
     });
     setPosts(res.data);
     console.log(res.data, "ww");
+
+    const resp = await axios.get("http://localhost:5000/Like", {
+      headers: { authorization: "Bearer " + token.token },
+    });
+
+    console.log(resp.data, "33333");
+    setLike(resp.data);
   }, []);
 
   const deletepost = async (id, index) => {
@@ -80,9 +87,17 @@ export default function Posts({ token }) {
         }
       );
       console.log(result.data);
+      setLike(result.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const deleteLike = async (id, i) => {
+    const res = await axios.delete(`http://localhost:5000/Like/${id}`, {
+      headers: { authorization: "Bearer " + token.token },
+    });
+    setLike(res.data);
   };
 
   return (
@@ -103,6 +118,32 @@ export default function Posts({ token }) {
       <div id="card">
         {searchArr.length
           ? searchArr.map((element, i) => {
+              let buttonVar = (
+                <button
+                  className="btnprimary"
+                  onClick={() => {
+                    addLike(element._id);
+                  }}
+                >
+                  {" "}
+                  🤍{" "}
+                </button>
+              );
+
+              for (let i = 0; i < like.length; i++) {
+                if (like[i]._id == element._id) {
+                  buttonVar = (
+                    <button
+                      id="btnu"
+                      onClick={() => {
+                        deleteLike(element._id, i);
+                      }}
+                    >
+                      ❤️
+                    </button>
+                  );
+                }
+              }
               return (
                 <div id="onecard" key={element._id}>
                   <b> {element.user.name} ♡</b>
@@ -114,15 +155,29 @@ export default function Posts({ token }) {
                   {token.payload.admin ? (
                     ""
                   ) : (
-                    <button
-                      className="btnprimary"
-                      onClick={() => {
-                        addLike(element._id);
-                      }}
-                    >
-                      {" "}
-                      🖤{" "}
-                    </button>
+                    <div>
+                      {buttonVar}
+                      {/* {toggle2 ? (
+                        <button
+                          className="btnprimary"
+                          onClick={() => {
+                            addLike(element._id);
+                          }}
+                        >
+                          {" "}
+                          🖤{" "}
+                        </button>
+                      ) : (
+                        <button
+                          id="btnu"
+                          onClick={() => {
+                            deleteLike(element._id, i);
+                          }}
+                        >
+                          ❤️
+                        </button>
+                      )} */}
+                    </div>
                   )}
                   {token.email == element.user.email ? (
                     token.payload.admin ? (
@@ -190,6 +245,33 @@ export default function Posts({ token }) {
               );
             })
           : Posts.map((element, i) => {
+              let buttonVar = (
+                <button
+                  className="btnprimary"
+                  onClick={() => {
+                    addLike(element._id);
+                  }}
+                >
+                  {" "}
+                  🤍{" "}
+                </button>
+              );
+
+              for (let i = 0; i < like.length; i++) {
+                if (like[i]._id == element._id) {
+                  buttonVar = (
+                    <button
+                      id="btnu"
+                      onClick={() => {
+                        deleteLike(element._id, i);
+                      }}
+                    >
+                      ❤️
+                    </button>
+                  );
+                }
+              }
+
               console.log(element);
               return (
                 <div id="onecard" key={element._id}>
@@ -202,15 +284,27 @@ export default function Posts({ token }) {
                   {token.payload.admin ? (
                     ""
                   ) : (
-                    <button
-                      className="btnprimary"
-                      onClick={() => {
-                        addLike(element._id);
-                      }}
-                    >
-                      {" "}
-                      🖤{" "}
-                    </button>
+                    <div>{buttonVar}</div>
+                    // toggle2 ? (
+                    //   <button
+                    //     className="btnprimary"
+                    //     onClick={() => {
+                    //       addLike(element._id);
+                    //     }}
+                    //   >
+                    //     {" "}
+                    //     🖤{" "}
+                    //   </button>
+                    // ) : (
+                    //   <button
+                    //     id="btnu"
+                    //     onClick={() => {
+                    //       deleteLike(element._id, i);
+                    //     }}
+                    //   >
+                    //     ❤️
+                    //   </button>
+                    // )
                   )}
                   {token.email == element.user.email ? (
                     token.payload.admin ? (

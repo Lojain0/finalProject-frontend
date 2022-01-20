@@ -21,3 +21,15 @@ body {
   background-color: #c9c5c4;
   color: black;
 }
+
+@media (max-width: 768px) {
+  .topnav {
+    margin: 0;
+    height: 50px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+}

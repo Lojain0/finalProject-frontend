@@ -24,8 +24,7 @@ h4 {
 }
 #main {
   font-family: Consolas, sans-serif;
-  /* background: linear-gradient(50deg, #8e9775 10%, #e28e83 70%); */
-  height: 100vh;
+  background-image: linear-gradient(to bottom, #f1ebe8, #f1ebe8);
   text-align: center;
 }
 
@@ -34,8 +33,7 @@ h4 {
 }
 .btn {
   margin: 20px;
-  background: #f1ebe8;
-  background-image: linear-gradient(to bottom, #f1ebe8, #ceb09e);
+  background: #8c8784;
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 50px;
@@ -47,7 +45,7 @@ h4 {
 }
 
 .btn:hover {
-  background: #c28d6e;
-  background-image: linear-gradient(to bottom, #c28d6e, #c9c5c4);
+  background: #b8b5b4;
+
   text-decoration: none;
 }

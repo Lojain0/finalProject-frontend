@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ProgressBar from "./ProgressBar";
 
 export default function AddPost({ token }) {
   const [img, setImg] = useState("");
   const [text, setText] = useState("");
+  const [file, setFile] = useState(null);
+  const [error, setError] = useState(null);
 
   const changeImgVal = (e) => {
     setImg(e.target.value);
@@ -28,6 +31,19 @@ export default function AddPost({ token }) {
     setText("");
   };
 
+  const types = ["image/png", "image/jpeg"];
+  const handleChange = (e) => {
+    let selected = e.target.files[0];
+    console.log(selected);
+    if (selected && types.includes(selected.type)) {
+      setFile(selected);
+      setError("");
+    } else {
+      setFile(null);
+      setError("Please select an image file (png or jpg)");
+    }
+  };
+
   return (
     <div>
       <div></div>
@@ -47,6 +63,15 @@ export default function AddPost({ token }) {
               placeholder=" Add Img  "
             />{" "}
           </div>
+          <input type="file" onChange={handleChange} />
+          <div>
+            {error && <div className="error">{error}</div>}
+            {file && <div>{file.name}</div>}
+            {file && (
+              <ProgressBar file={file} setFile={setFile} setImg={setImg} />
+            )}
+          </div>
+
           <div class="form-control">
             <label for="text"> text</label>
             <input
