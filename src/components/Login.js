@@ -17,10 +17,13 @@ export default function Login({ setToken }) {
 
   const checkLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
       console.log(response.data, "loooogggg");
       setToken(response.data);
       history.push("/posts");

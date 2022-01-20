@@ -24,12 +24,18 @@ body {
 
 @media (max-width: 768px) {
   .topnav {
-    margin: 0;
-    height: 50px;
+    overflow: hidden;
+    background-color: #333;
   }
-  ul {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  .topnav a {
+    float: left;
+    text-align: center;
+    padding: 6px 8px;
+    text-decoration: none;
+    font-size: 9px;
+  }
+  .topnav a:hover {
+    background-color: #c9c5c4;
+    color: black;
   }
 }

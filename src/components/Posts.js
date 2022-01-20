@@ -11,13 +11,13 @@ export default function Posts({ token }) {
   const [like, setLike] = useState([]);
 
   useEffect(async () => {
-    const res = await axios.get("http://localhost:5000/posts", {
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts`, {
       headers: { authorization: `Bearer ${token.token}` },
     });
     setPosts(res.data);
     console.log(res.data, "ww");
 
-    const resp = await axios.get("http://localhost:5000/Like", {
+    const resp = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Like`, {
       headers: { authorization: "Bearer " + token.token },
     });
 
@@ -26,9 +26,12 @@ export default function Posts({ token }) {
   }, []);
 
   const deletepost = async (id, index) => {
-    const deletepost = await axios.delete(`http://localhost:5000/posts/${id}`, {
-      headers: { authorization: "Bearer " + token.token },
-    });
+    const deletepost = await axios.delete(
+      `${process.env.REACT_APP_BACKEND_URL}/posts/${id}`,
+      {
+        headers: { authorization: "Bearer " + token.token },
+      }
+    );
     console.log(deletepost.data);
     const copiedArr = [...Posts];
     copiedArr.splice(index, 1);
@@ -39,7 +42,7 @@ export default function Posts({ token }) {
 
   const updatePost = async (id) => {
     const update = await axios.put(
-      `http://localhost:5000/posts/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/posts/${id}`,
       {
         text: upText,
       },
@@ -80,7 +83,7 @@ export default function Posts({ token }) {
   const addLike = async (id) => {
     try {
       const result = await axios.post(
-        `http://localhost:5000/Like/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/Like/${id}`,
         {},
         {
           headers: { authorization: "Bearer " + token.token },
@@ -94,9 +97,12 @@ export default function Posts({ token }) {
   };
 
   const deleteLike = async (id, i) => {
-    const res = await axios.delete(`http://localhost:5000/Like/${id}`, {
-      headers: { authorization: "Bearer " + token.token },
-    });
+    const res = await axios.delete(
+      `${process.env.REACT_APP_BACKEND_URL}/Like/${id}`,
+      {
+        headers: { authorization: "Bearer " + token.token },
+      }
+    );
     setLike(res.data);
   };
 

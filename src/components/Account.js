@@ -11,9 +11,12 @@ export default function Account({ token }) {
   const [toggle, setToggle] = useState(false);
 
   useEffect(async () => {
-    const res = await axios.get("http://localhost:5000/infouser", {
-      headers: { authorization: `Bearer ${token.token}` },
-    });
+    const res = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/infouser`,
+      {
+        headers: { authorization: `Bearer ${token.token}` },
+      }
+    );
     setUser(res.data);
     // console.log(res.data);
     setName(res.data.name);
@@ -41,7 +44,8 @@ export default function Account({ token }) {
   const update = async () => {
     if (token) {
       const result = await axios.put(
-        "http://localhost:5000/updateuser",
+        `${process.env.REACT_APP_BACKEND_URL}
+        updateuser`,
         {
           name: name,
           photo: photo,

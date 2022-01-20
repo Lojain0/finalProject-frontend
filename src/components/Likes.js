@@ -7,9 +7,12 @@ export default function Likes({ token }) {
 
   useEffect(async () => {
     if (token) {
-      const resp = await axios.get("http://localhost:5000/Like", {
-        headers: { authorization: "Bearer " + token.token },
-      });
+      const resp = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/Like`,
+        {
+          headers: { authorization: "Bearer " + token.token },
+        }
+      );
       // console.log(resp.data, "33333");
 
       setLike(resp.data);
@@ -17,9 +20,12 @@ export default function Likes({ token }) {
   }, []);
 
   const deleteLike = async (id, i) => {
-    const res = await axios.delete(`http://localhost:5000/Like/${id}`, {
-      headers: { authorization: "Bearer " + token.token },
-    });
+    const res = await axios.delete(
+      `${process.env.REACT_APP_BACKEND_URL}/Like/${id}`,
+      {
+        headers: { authorization: "Bearer " + token.token },
+      }
+    );
     const coppyDelete = [...like];
     coppyDelete.splice(i, 1);
     setLike(coppyDelete);

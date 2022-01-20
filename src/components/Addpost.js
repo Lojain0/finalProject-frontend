@@ -18,7 +18,7 @@ export default function AddPost({ token }) {
 
   const addPost = async () => {
     const result = await axios.post(
-      "http://localhost:5000/posts",
+      `${process.env.REACT_APP_BACKEND_URL}/posts`,
       {
         newImg: img,
         newtext: text,

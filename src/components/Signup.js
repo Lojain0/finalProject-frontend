@@ -26,11 +26,14 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/signup", {
-        name: nameInput,
-        email: emailInput,
-        password: passwordInput,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/signup`,
+        {
+          name: nameInput,
+          email: emailInput,
+          password: passwordInput,
+        }
+      );
       console.log(response.data);
       if (response.status === 201) {
         history.push("/login");

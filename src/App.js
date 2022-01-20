@@ -8,8 +8,10 @@ import Posts from "./components/Posts";
 import Likes from "./components/Likes";
 import Account from "./components/Account";
 import AddPost from "./components/AddPost";
+require("dotenv").config();
 
 export default function App() {
+  console.log(process.env.REACT_APP_BACKEND_URL);
   const [token, setToken] = useState(() => {
     const saved = localStorage.getItem("token");
     const initialValue = JSON.parse(saved);
